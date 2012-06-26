@@ -184,7 +184,11 @@ module Sunspot
       end
 
       def group_response #:nodoc:
-        @solr_result['grouped']
+        res = @solr_result['grouped']
+        if res.class == Array && res.length % 2 == 0
+          res = Hash[*res]
+        end
+        res
       end
   
       # 
