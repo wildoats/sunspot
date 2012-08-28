@@ -42,9 +42,7 @@ module Sunspot
       def execute
         reset
         params = @query.to_params
-        @solr_result = CachingMemcached.cache_lookup("SS#{params.to_s}") {
-          @connection.post "#{request_handler}", :data => params
-        }
+        @solr_result = @connection.post "#{request_handler}", :data => params
         self
       end
 
